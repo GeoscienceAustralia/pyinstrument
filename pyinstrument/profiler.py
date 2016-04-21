@@ -156,7 +156,7 @@ class Profiler(object):
     def output_text(self, root=False, unicode=False, color=False):
         return self.starting_frame(root=root).as_text(unicode=unicode, color=color)
 
-    def output_html(self, root=False):
+    def output_html(self, root=False, as_pieces=False):
         resources_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'resources/')
 
         with open(os.path.join(resources_dir, 'style.css')) as f:
@@ -165,10 +165,16 @@ class Profiler(object):
         with open(os.path.join(resources_dir, 'profile.js')) as f:
             js = f.read()
 
+        body = self.starting_frame(root).as_html()
+
+        if as_pieces:
+            return {
+                'body':body,
+                'css' :css,
+                'js'  :js}
+
         with open(os.path.join(resources_dir, 'jquery-1.11.0.min.js')) as f:
             jquery_js = f.read()
-
-        body = self.starting_frame(root).as_html()
 
         page = '''
             <html>
