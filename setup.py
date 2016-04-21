@@ -11,6 +11,7 @@ setup(
     keywords=['profiling', 'profile', 'profiler', 'cpu', 'time'],
     include_package_data=True,
     entry_points={'console_scripts': ['pyinstrument = pyinstrument.__main__:main']},
+    package_data = {'pyinstrument': ['resources/*']},
     zip_safe=False,
     classifiers=[
         'Development Status :: 4 - Beta',
